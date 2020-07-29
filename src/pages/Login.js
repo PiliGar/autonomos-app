@@ -1,41 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import request from "../utils/request";
 
-class Login extends React.Component {
-  state = { email: "", password: "" };
-  onSubmit = (e) => {
+const Login = () => {
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const onSubmit = (e) => {
     e.preventDefault();
     console.log("submmit");
-    console.log(this.state);
+    console.log(credentials);
     request("ApplicationUsers/login", {
       method: "POST",
       body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
+        email: credentials.email,
+        password: credentials.password,
       }),
     })
       .then((res) => console.log(res))
       .catch((error) => console.error(error));
   };
 
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.onSubmit}>
-          <input
-            type="email"
-            onChange={(e) => this.setState({ email: e.target.value })}
-            value={this.state.email}
-          ></input>
-          <input
-            type="password"
-            onChange={(e) => this.setState({ password: e.target.value })}
-            value={this.state.password}
-          ></input>
-          <button type="submit">Iniciar sesion</button>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form onSubmit={onSubmit}>
+        <input
+          type="email"
+          onChange={(e) =>
+            setCredentials({ ...credentials, email: e.target.value })
+          }
+          value={credentials.email}
+        ></input>
+        <input
+          type="password"
+          onChange={(e) =>
+            setCredentials({ ...credentials, password: e.target.value })
+          }
+          value={credentials.password}
+        ></input>
+        <button type="submit">Iniciar sesion</button>
+      </form>
+    </div>
+  );
+};
 export default Login;
