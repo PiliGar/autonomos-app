@@ -44,7 +44,7 @@ const Button = styled.button`
   }
 `;
 
-const Login = ({ t, i18n }) => {
+const Login = ({ t, i18n, login }) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const onSubmit = (e) => {
     e.preventDefault();
@@ -57,7 +57,7 @@ const Login = ({ t, i18n }) => {
         password: credentials.password,
       }),
     })
-      .then((res) => console.log(res))
+      .then((res) => login())
       .catch((error) => console.error(error));
   };
   const changeLanguage = (language) => i18n.changeLanguage(language);
