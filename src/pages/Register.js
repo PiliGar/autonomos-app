@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import request from "../utils/request";
-//import "./Login.css";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
+import { Button, Input, Label } from "../ui/";
+import { Languages } from "../components/";
 
 const Container = styled.div`
   display: flex;
@@ -22,35 +24,13 @@ const Box = styled.div`
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
 `;
 
-const Input = styled.input`
-  margin-bottom: 20px;
-  padding: 10px;
-`;
-
-const Label = styled.label`
-  font-size: 14px;
-  margin-bottom: 5px;
-  color: #186faf;
-`;
-
-const Button = styled.button`
-  padding: 10px;
-  cursor: pointer;
-  color: white;
-  background-color: #186faf;
-  border: none;
-  :hover {
-    background-color: #2680c2;
-  }
-`;
-
-const Login = ({ t, i18n, login }) => {
+const Register = ({ t, login }) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const onSubmit = (e) => {
     e.preventDefault();
     console.log("submmit");
     console.log(credentials);
-    request("ApplicationUsers/login", {
+    request("ApplicationUsers", {
       method: "POST",
       body: JSON.stringify({
         email: credentials.email,
@@ -60,7 +40,6 @@ const Login = ({ t, i18n, login }) => {
       .then((res) => login())
       .catch((error) => console.error(error));
   };
-  const changeLanguage = (language) => i18n.changeLanguage(language);
 
   return (
     <Container className="container">
@@ -89,31 +68,10 @@ const Login = ({ t, i18n, login }) => {
           value={credentials.password}
         ></Input>
         <Button type="submit">Iniciar sesion</Button>
-        <div
-          style={{ display: "flex", justifyContent: "center", marginTop: 20 }}
-        >
-          <Button
-            style={{
-              backgroundColor: "#DEDEDE",
-              color: "black",
-              marginRight: 20,
-            }}
-            onClick={() => changeLanguage("es")}
-          >
-            ES
-          </Button>
-          <Button
-            style={{
-              backgroundColor: "#DEDEDE",
-              color: "black",
-            }}
-            onClick={() => changeLanguage("en")}
-          >
-            EN
-          </Button>
-        </div>
+        <Link to="/">¿Ya tienes cuenta? ¡Inicia sesión aquí!</Link>
+        <Languages />
       </Box>
     </Container>
   );
 };
-export default withTranslation()(Login);
+export default withTranslation()(Register);
