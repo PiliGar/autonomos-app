@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import request from "../utils/request";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 import { Button, UnAuthInput } from "../ui/";
@@ -23,26 +22,22 @@ const Box = styled.div`
   border-radius: 10px;
 `;
 
-const Register = ({ t, login }) => {
+const UnAuthPage = ({
+  t,
+  onSubmit,
+  title,
+  submitText,
+  secondaryText,
+  secondaryLink,
+}) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-  const onSubmit = (e) => {
+  const onLocalSubmit = (e) => {
     e.preventDefault();
-    console.log("submmit");
-    console.log(credentials);
-    request("ApplicationUsers", {
-      method: "POST",
-      body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    })
-      .then((res) => login())
-      .catch((error) => console.error(error));
+    onSubmit(credentials);
   };
-
   return (
     <Container className="container">
-      <Box as="form" className="box" onSubmit={onSubmit}>
+      <Box as="form" className="box" onSubmit={onLocalSubmit}>
         <span
           style={{
             textAlign: "center",
@@ -52,7 +47,7 @@ const Register = ({ t, login }) => {
             color: "white",
           }}
         >
-          {t("register.title")}
+          {title}
         </span>
         <UnAuthInput
           placeholder={t("general.email")}
@@ -74,13 +69,13 @@ const Register = ({ t, login }) => {
           }
           value={credentials.password}
         ></UnAuthInput>
-        <Button color="secondary" type="submit">
-          Iniciar sesion
+        <Button color="secondary" style={{ fontWeight: "bold" }} type="submit">
+          {submitText}
         </Button>
         <span style={{ marginTop: 35, color: "#2f308A", fontWeight: "bold" }}>
-          ¿Ya tienes cuenta?
-          <RouterLink component={Link} to="/" color="primary">
-            ¡Inicia sesión aquí!
+          {secondaryText}
+          <RouterLink component={Link} to="/register" color="primary">
+            {secondaryLink}
           </RouterLink>
         </span>
         <Languages />
@@ -88,4 +83,4 @@ const Register = ({ t, login }) => {
     </Container>
   );
 };
-export default withTranslation()(Register);
+export default withTranslation()(UnAuthPage);
