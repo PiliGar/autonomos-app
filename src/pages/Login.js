@@ -7,14 +7,14 @@ const Login = ({ t, login }) => {
   const onSubmit = (credentials) => {
     console.log("submmit");
     console.log(credentials);
-    request("ApplicationUsers/login", {
+    request("ApplicationUsers/login?include=USER", {
       method: "POST",
       body: JSON.stringify({
         email: credentials.email,
         password: credentials.password,
       }),
     })
-      .then((res) => login())
+      .then(({ user }) => login(user))
       .catch((error) => console.error(error));
   };
 

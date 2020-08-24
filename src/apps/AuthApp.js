@@ -8,10 +8,10 @@ import {
 import Customers from "../pages/Customers";
 import { AuthPage } from "../ui";
 
-const AuthApp = () => {
+const AuthApp = ({ user }) => {
   return (
     <Router>
-      <AuthPage>
+      <AuthPage user={user}>
         <Switch>
           <Route path="/" exact>
             <Customers />
