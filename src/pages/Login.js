@@ -24,6 +24,7 @@ const Login = ({ t, login }) => {
       title={t("login.title")}
       submitText={t("login.c2a")}
       secondaryText={t("login.secondaryText")}
+      secondaryLink="/"
       linkText={t("login.linkText")}
     ></UnAuthPage>
   );

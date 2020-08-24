@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 import { Button, UnAuthInput } from "../ui/";
-import { Link } from "bluejay-ui";
+import { Link as StyledLink } from "bluejay-ui";
 import { Languages } from "../components/";
 
 const Container = styled.div`
@@ -29,6 +29,7 @@ const UnAuthPage = ({
   submitText,
   secondaryText,
   secondaryLink,
+  linkText,
 }) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const onLocalSubmit = (e) => {
@@ -74,9 +75,9 @@ const UnAuthPage = ({
         </Button>
         <span style={{ marginTop: 35, color: "#2f308A", fontWeight: "bold" }}>
           {secondaryText}
-          <RouterLink component={Link} to="/register" color="primary">
-            {secondaryLink}
-          </RouterLink>
+          <Link component={StyledLink} to={secondaryLink} color="primary">
+            {linkText}
+          </Link>
         </span>
         <Languages />
       </Box>

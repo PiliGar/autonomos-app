@@ -1,6 +1,6 @@
 {
   "translation": {
-    "general": { "email": "Email", "password": "Contraseña" },
+    "general": { "email": "Email", "password": "Password" },
     "login": {
       "title": "Welcome again!",
       "c2a": "Log in",
