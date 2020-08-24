@@ -1,6 +1,17 @@
 {
   "translation": {
-    "login": { "title": "Welcome again" },
-    "register": { "title": "Welcome" }
+    "general": { "email": "Email", "password": "Password" },
+    "login": {
+      "title": "Welcome again!",
+      "c2a": "Log in",
+      "secondaryText": "Not registered yet?",
+      "linkText": "Create your account"
+    },
+    "register": {
+      "title": "Welcome!",
+      "c2a": "Sign in",
+      "secondaryText": "Already have an account?",
+      "linkText": "Log in here!"
+    }
   }
 }

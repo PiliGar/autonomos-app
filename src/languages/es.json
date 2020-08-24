@@ -1,6 +1,17 @@
 {
   "translation": {
-    "login": { "title": "Bienvenido/a de nuevo" },
-    "register": { "title": "Bienvenido/a" }
+    "general": { "email": "Email", "password": "Contraseña" },
+    "login": {
+      "title": "Bienvenido/a de nuevo",
+      "c2a": "Inicia sesión",
+      "secondaryText": "¿Aún no tienes cuenta",
+      "linkText": "Regístrate aquí"
+    },
+    "register": {
+      "title": "Bienvenido/a",
+      "c2a": "Regístrate",
+      "secondaryText": "¿Ya tienes una cuenta?",
+      "linkText": "Inicia sesión aqui"
+    }
   }
 }
