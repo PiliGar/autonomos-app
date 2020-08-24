@@ -19,7 +19,17 @@ const App = () => {
     setUser(nextUser);
     setIsLoggedIn(true);
   };
-  return isLoggedIn ? <AuthApp user={user} /> : <UnAuthApp login={login} />;
+  const logout = (nextUser) => {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("user");
+    setUser({});
+    setIsLoggedIn(false);
+  };
+  return isLoggedIn ? (
+    <AuthApp user={user} logout={logout} />
+  ) : (
+    <UnAuthApp login={login} />
+  );
 };
 
 export default App;
