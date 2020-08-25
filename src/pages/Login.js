@@ -14,7 +14,7 @@ const Login = ({ t, login }) => {
         password: credentials.password,
       }),
     })
-      .then(({ user }) => login(user))
+      .then(({ id: token, user }) => login({ token, user }))
       .catch((error) => console.error(error));
   };
 
