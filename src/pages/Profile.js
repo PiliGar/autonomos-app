@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, Card, Input } from "bluejay-ui";
 import styled from "styled-components";
+import { Button } from "../ui/index";
+import { ReactComponent as Save } from "../images/save.svg";
 
 const FormRow = styled.div`
   display: flex;
@@ -11,25 +13,122 @@ const FormRow = styled.div`
   }
 `;
 
-const Profile = () => {
+const Profile = ({ user }) => {
+  const [nextUser, setNextUser] = useState(user);
+  const upadateUserState = ({ target: { name, value } }) =>
+    setNextUser({ ...nextUser, [name]: value });
+  const onSubmit = (e) => {
+    e.preventDefault();
+    request(`AplicationUsers/${user.id}`, {
+      method: "PATCH",
+      body: JSON.stringify(nextUser),
+    });
+  };
   return (
     <>
       <Text as="span" color="default">
         EDITAR {""}
-        <Text as="B" style={{ fontSize: 25 }} color="black">
+        <Text as="b" style={{ fontSize: 25 }} color="black">
           Perfil
         </Text>
       </Text>
       <Card style={{ marginTop: 30, padding: "50px 100px" }}>
-        <Text style={{ fontSize: 18 }} color="black">
-          Información personal
-        </Text>
-        <form>
+        <form onSubmit={onSubmit}>
+          <Text style={{ fontSize: 18 }} color="black">
+            Información personal
+          </Text>
           <FormRow>
-            <Input name="Nombre" label="Nombre"></Input>
-            <Input name="Nombre" label="Nombre"></Input>
-            <Input name="Nombre" label="Nombre"></Input>
+            <Input
+              onChange={upadateUserState}
+              name="name"
+              label="Nombre"
+              value={nextUser.name}
+              type="text"
+            ></Input>
+            <Input
+              onChange={upadateUserState}
+              name="firstName"
+              label="PrimerApellido"
+              value={nextUser.firstName}
+            ></Input>
+            <Input
+              onChange={upadateUserState}
+              name="lastName"
+              label="Nombre"
+              value={nextUser.lastName}
+              type="text"
+            ></Input>
           </FormRow>
+          <FormRow>
+            <Input
+              onChange={upadateUserState}
+              name="phone"
+              label="Teléfono móvil"
+              value={nextUser.phone}
+              type="telephone"
+            ></Input>
+            <Input
+              onChange={upadateUserState}
+              name="dni"
+              label="DNI"
+              value={nextUser.dni}
+              type="text"
+            ></Input>
+            <Input
+              onChange={upadateUserState}
+              name="email"
+              label="Email"
+              value={nextUser.email}
+            ></Input>
+          </FormRow>
+          <Text style={{ fontSize: 18 }} color="black">
+            Información de facturación
+          </Text>
+          <FormRow>
+            <Input
+              onChange={upadateUserState}
+              name="billingCity"
+              label="Ciudad"
+              value={nextUser.billingCity}
+              type="text"
+            ></Input>
+            <Input
+              onChange={upadateUserState}
+              name="billingAddress"
+              label="Dirección"
+              value={nextUser.billingAddress}
+              type="text"
+            ></Input>
+            <Input
+              onChange={upadateUserState}
+              name="billingPostalCode"
+              label="Código Postal"
+              value={nextUser.billingPostalCode}
+            ></Input>
+          </FormRow>
+          <FormRow>
+            <Input
+              onChange={upadateUserState}
+              name="irpf"
+              label="IRPF %"
+              value={nextUser.irpf}
+              type="number"
+            ></Input>
+            <Input
+              onChange={upadateUserState}
+              name="billingPaymentMethod"
+              label="Método de pago"
+              value={nextUser.billingPaymentMethod}
+              type="text"
+            ></Input>
+          </FormRow>
+          <Button
+            icon={Save}
+            color="primary"
+            style={{ marginTop: 30, fontWeight: 600 }}
+          >
+            Guardar
+          </Button>
         </form>
       </Card>
     </>
