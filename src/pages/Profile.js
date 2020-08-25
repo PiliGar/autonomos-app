@@ -3,6 +3,7 @@ import { Text, Card, Input } from "bluejay-ui";
 import styled from "styled-components";
 import { Button } from "../ui/index";
 import { ReactComponent as Save } from "../images/save.svg";
+import request from "../utils/request";
 
 const FormRow = styled.div`
   display: flex;
@@ -13,16 +14,16 @@ const FormRow = styled.div`
   }
 `;
 
-const Profile = ({ user }) => {
+const Profile = ({ user, updateUser }) => {
   const [nextUser, setNextUser] = useState(user);
   const upadateUserState = ({ target: { name, value } }) =>
     setNextUser({ ...nextUser, [name]: value });
   const onSubmit = (e) => {
     e.preventDefault();
-    request(`AplicationUsers/${user.id}`, {
+    request(`ApplicationUsers/${user.id}`, {
       method: "PATCH",
       body: JSON.stringify(nextUser),
-    });
+    }).then((user) => updateUser(user));
   };
   return (
     <>
