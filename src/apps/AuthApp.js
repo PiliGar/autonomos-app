@@ -17,7 +17,7 @@ const AuthApp = ({ user, logout }) => {
             <Customers />
           </Route>
           <Route path="/profile" exact>
-            <Profile />
+            <Profile user={user} />
           </Route>
           <Redirect to="/"></Redirect>
         </Switch>
