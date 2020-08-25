@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Sidebar, List, ListItem, Link, Button } from "bluejay-ui";
 import { ReactComponent as Customer } from "../images/customer.svg";
 import { ReactComponent as Logout } from "../images/logout.svg";
+import { ReactComponent as Edit } from "../images/edit.svg";
 
 import { Link as RouterLink } from "react-router-dom";
 const Container = styled.div`
@@ -13,10 +14,11 @@ const Container = styled.div`
 const MainContainer = styled.div`
   flex-grow: 1;
   margin: 15px;
-  height: calc(100vh-30px);
+  height: calc(100vh-60px);
   background: linear-gradient(180deg, #edf0f4 0%, #dadde1 100%);
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
+  padding: 15px 60px;
 `;
 
 const ControlsContainer = styled.div`
@@ -33,6 +35,15 @@ const ProfileImage = styled.img`
   height: 60px;
   border-radius: 50%;
   border: 1.5px solid #19c3fc;
+`;
+
+const SmallButton = styled(Button)`
+  height: 40px;
+  width: 40px;
+  svg {
+    width: 14px;
+    height: 14px;
+  }
 `;
 
 const AuthPage = ({ user, children, logout }) => {
@@ -56,13 +67,20 @@ const AuthPage = ({ user, children, logout }) => {
           </List>
           <ControlsContainer>
             {user.imageUrl && <ProfileImage src={user.imageUrl} />}
-            <Button
+            <Link as={RouterLink} to="/profile">
+              <SmallButton
+                color="primary"
+                style={{ marginTop: 20 }}
+                rounded
+                icon={Edit}
+              ></SmallButton>
+            </Link>
+            <SmallButton
               color="#FC6B19"
-              style={{ marginTop: 20 }}
               rounded
               icon={Logout}
               onClick={logout}
-            ></Button>
+            ></SmallButton>
           </ControlsContainer>
         </Sidebar>
         <MainContainer>{children}</MainContainer>

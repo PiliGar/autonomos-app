@@ -5,8 +5,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+import { Login, Register } from "../pages";
 
 const UnAuthApp = ({ login }) => {
   return (
